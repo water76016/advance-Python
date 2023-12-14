@@ -1,7 +1,16 @@
 # 骤降分析
 
-from sklearn.datasets import make_blobs  
-from sklearn.neighbors import LocalOutlierFactor  
+import numpy as np 
+import pandas as pd 
+import os 
+from pyod.models.lof import LOF 
+
+#获取训练模型 
+def getTrainModel(list_data):
+    model = LOF(n_neighbors = 10)
+    train_data = np.array(list_data).reshape(-1, 1)
+    model.fit(train_data)
+    return model 
   
 # 生成样本数据  
 X, _ = make_blobs(n_samples=100, centers=2, random_state=42)  
